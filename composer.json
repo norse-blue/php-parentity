@@ -1,0 +1,29 @@
+{
+    "name": "norse-blue/parentity",
+    "type": "library",
+    "description": "A package to allow MTI entities in Laravel using Eloquent models.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Axel Pardemann",
+            "email": "axel.pardemann@norse.blue"
+        }
+    ],
+    "require": {
+        "illuminate/database": "~5.7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.7.0",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NorseBlue\\Parentity\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NorseBlue\\Parentity\\Tests\\": "tests/"
+        }
+    }
+}
