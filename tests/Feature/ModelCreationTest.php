@@ -16,7 +16,7 @@ class ModelCreationTest extends TestCase
         $customer = Customer::create(['name' => 'Axel']);
 
         $this->assertInstanceOf(Customer::class, $customer);
-        $this->assertEquals($customer->name, 'Axel');
+        $this->assertEquals('Axel', $customer->name);
         $this->assertDatabaseHas('customers', ['name' => 'Axel']);
     }
 
@@ -29,10 +29,10 @@ class ModelCreationTest extends TestCase
         ]);
 
         $this->assertInstanceOf(Customer::class, $customer);
-        $this->assertEquals($customer->name, 'Axel');
+        $this->assertEquals('Axel', $customer->name);
         $this->assertDatabaseHas('customers', ['name' => 'Axel']);
         $this->assertInstanceOf(Person::class, $customer->entity);
-        $this->assertEquals($customer->entity->last_name, 'Pardemann');
+        $this->assertEquals('Pardemann', $customer->entity->last_name);
         $this->assertDatabaseHas('people', ['last_name' => 'Pardemann']);
         $this->assertDatabaseHas('customers', [
             'entity_type' => get_class($customer->entity),
@@ -51,12 +51,12 @@ class ModelCreationTest extends TestCase
         ]);
 
         $this->assertInstanceOf(Customer::class, $customer);
-        $this->assertEquals($customer->name, 'Norse Blue');
+        $this->assertEquals('Norse Blue', $customer->name);
         $this->assertDatabaseHas('customers', ['name' => 'Norse Blue']);
         $this->assertInstanceOf(Company::class, $customer->entity);
-        $this->assertEquals($customer->entity->contact_name, 'Axel');
-        $this->assertEquals($customer->entity->contact_last_name, 'Pardemann');
-        $this->assertEquals($customer->entity->tax_id, 'NB0123456');
+        $this->assertEquals('Axel', $customer->entity->contact_name);
+        $this->assertEquals('Pardemann', $customer->entity->contact_last_name);
+        $this->assertEquals('NB0123456', $customer->entity->tax_id);
         $this->assertDatabaseHas('companies', [
             'contact_name' => 'Axel',
             'contact_last_name' => 'Pardemann',
@@ -77,10 +77,10 @@ class ModelCreationTest extends TestCase
         ]);
 
         $this->assertInstanceOf(Customer::class, $customer);
-        $this->assertEquals($customer->name, 'Axel');
+        $this->assertEquals('Axel', $customer->name);
         $this->assertDatabaseHas('customers', ['name' => 'Axel']);
         $this->assertInstanceOf(Person::class, $customer->entity);
-        $this->assertEquals($customer->entity->last_name, 'Pardemann');
+        $this->assertEquals('Pardemann', $customer->entity->last_name);
         $this->assertDatabaseHas('people', ['last_name' => 'Pardemann']);
         $this->assertDatabaseHas('customers', [
             'entity_type' => get_class($customer->entity),
@@ -99,12 +99,12 @@ class ModelCreationTest extends TestCase
         ]);
 
         $this->assertInstanceOf(Customer::class, $customer);
-        $this->assertEquals($customer->name, 'Norse Blue');
+        $this->assertEquals('Norse Blue', $customer->name);
         $this->assertDatabaseHas('customers', ['name' => 'Norse Blue']);
         $this->assertInstanceOf(Company::class, $customer->entity);
-        $this->assertEquals($customer->entity->contact_name, 'Axel');
-        $this->assertEquals($customer->entity->contact_last_name, 'Pardemann');
-        $this->assertEquals($customer->entity->tax_id, 'NB0123456');
+        $this->assertEquals('Axel', $customer->entity->contact_name);
+        $this->assertEquals('Pardemann', $customer->entity->contact_last_name);
+        $this->assertEquals('NB0123456', $customer->entity->tax_id);
         $this->assertDatabaseHas('companies', [
             'contact_name' => 'Axel',
             'contact_last_name' => 'Pardemann',
@@ -145,10 +145,10 @@ class ModelCreationTest extends TestCase
         ]);
 
         $this->assertInstanceOf(Person::class, $person);
-        $this->assertEquals($person->last_name, 'Pardemann');
+        $this->assertEquals('Pardemann', $person->last_name);
         $this->assertDatabaseHas('people', ['last_name' => 'Pardemann']);
         $this->assertInstanceOf(Customer::class, $person->parent);
-        $this->assertEquals($person->parent->name, 'Axel');
+        $this->assertEquals('Axel', $person->parent->name);
         $this->assertDatabaseHas('customers', ['name' => 'Axel']);
         $this->assertDatabaseHas('customers', [
             'entity_type' => get_class($person),
@@ -167,16 +167,16 @@ class ModelCreationTest extends TestCase
         ]);
 
         $this->assertInstanceOf(Company::class, $company);
-        $this->assertEquals($company->contact_name, 'Axel');
-        $this->assertEquals($company->contact_last_name, 'Pardemann');
-        $this->assertEquals($company->tax_id, 'NB0123456');
+        $this->assertEquals('Axel', $company->contact_name);
+        $this->assertEquals('Pardemann', $company->contact_last_name);
+        $this->assertEquals('NB0123456', $company->tax_id);
         $this->assertDatabaseHas('companies', [
             'contact_name' => 'Axel',
             'contact_last_name' => 'Pardemann',
             'tax_id' => 'NB0123456',
         ]);
         $this->assertInstanceOf(Customer::class, $company->parent);
-        $this->assertEquals($company->parent->name, 'Norse Blue');
+        $this->assertEquals('Norse Blue', $company->parent->name);
         $this->assertDatabaseHas('customers', ['name' => 'Norse Blue']);
         $this->assertDatabaseHas('customers', [
             'entity_type' => get_class($company),
