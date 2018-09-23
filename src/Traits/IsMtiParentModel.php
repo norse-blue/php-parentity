@@ -4,7 +4,7 @@ namespace NorseBlue\Parentity\Traits;
 
 trait IsMtiParentModel
 {
-    protected $childAliases = [];
+    protected $childTypeAliases = [];
 
     protected $ownAttributes = [];
 
@@ -36,7 +36,7 @@ trait IsMtiParentModel
 
     private function processCall($method, $parameters)
     {
-        $childModel = is_string($parameters[0]) ? $this->childAliases[($entity_type = array_shift($parameters))] ?? $entity_type : false;
+        $childModel = is_string($parameters[0]) ? $this->childTypeAliases[($entity_type = array_shift($parameters))] ?? $entity_type : false;
 
         $parent = $this->forwardCallTo($this->newQuery(), $method, $parameters);
         if ($childModel !== false) {

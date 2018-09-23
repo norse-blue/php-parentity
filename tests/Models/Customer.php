@@ -12,7 +12,7 @@ class Customer extends MtiParentModel
         'name',
     ];
 
-    protected $childAliases = [
+    protected $childTypeAliases = [
         'person' => Person::class,
         'company' => Company::class,
     ];
