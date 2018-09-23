@@ -1,7 +1,7 @@
 {
     "name": "norse-blue/parentity",
     "type": "library",
-    "description": "A package to allow MTI entities in Laravel using Eloquent models.",
+    "description": "Parentity is a package that allows the use of MTI entities in Laravel 5.7+ using Eloquent models.",
     "license": "MIT",
     "authors": [
         {
