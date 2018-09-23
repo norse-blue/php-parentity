@@ -4,13 +4,18 @@ namespace NorseBlue\Parentity\Traits;
 
 trait IsMtiParentModel
 {
-    protected $isMtiParentModel = true;
-
     protected $childAliases = [];
+
+    protected $ownAttributes = [];
 
     public function entity()
     {
         return $this->morphTo();
+    }
+
+    public function getOwnAttributes()
+    {
+        return array_merge($this->ownAttributes, ['created_at', 'updated_at', 'deleted_at']);
     }
 
     /**
@@ -49,6 +54,10 @@ trait IsMtiParentModel
      */
     public function __get($key)
     {
+        if ($key != 'entity' && !in_array($key, $this->getOwnAttributes())) {
+            return $this->entity->$key;
+        }
+
         return $this->getAttribute($key);
     }
 
@@ -61,6 +70,10 @@ trait IsMtiParentModel
      */
     public function __set($key, $value)
     {
+        if ($key != 'entity' && !in_array($key, $this->getOwnAttributes())) {
+            $this->entity->$key = $value;
+        }
+
         $this->setAttribute($key, $value);
     }
 }

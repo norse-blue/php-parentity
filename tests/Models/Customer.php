@@ -16,4 +16,8 @@ class Customer extends MtiParentModel
         'person' => Person::class,
         'company' => Company::class,
     ];
+
+    protected $ownAttributes = [
+        'id', 'name', 'entity_type', 'entity_id',
+    ];
 }

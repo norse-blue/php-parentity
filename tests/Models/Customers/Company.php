@@ -12,8 +12,6 @@ class Company extends MtiChildModel
     protected $parentEntity = 'entity';
 
     protected $fillable = [
-        'contact_name',
-        'contact_last_name',
-        'tax_id',
+        'contact_name', 'contact_last_name', 'tax_id',
     ];
 }

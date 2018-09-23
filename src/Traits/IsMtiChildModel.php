@@ -6,8 +6,6 @@ use NorseBlue\Parentity\Eloquent\MtiParentModel;
 
 trait IsMtiChildModel
 {
-    protected $isMtiChildModel = true;
-
     protected $parentModel = '';
 
     protected $parentEntity = '';
@@ -50,6 +48,10 @@ trait IsMtiChildModel
      */
     public function __get($key)
     {
+        if ($key != 'parent' && !in_array($key, ['created_at', 'updated_at', 'deleted_at']) && in_array($key, $this->parent->getOwnAttributes())) {
+            return $this->parent->$key;
+        }
+
         return $this->getAttribute($key);
     }
 
@@ -62,6 +64,10 @@ trait IsMtiChildModel
      */
     public function __set($key, $value)
     {
+        if ($key != 'parent' && !in_array($key, ['created_at', 'updated_at', 'deleted_at']) && in_array($key, $this->parent->getOwnAttributes())) {
+            $this->parent->$key = $value;
+        }
+
         $this->setAttribute($key, $value);
     }
 }
