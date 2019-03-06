@@ -2,18 +2,37 @@
 
 namespace NorseBlue\Parentity\Traits;
 
+/**
+ * Trait IsMtiParentModel
+ *
+ * @package NorseBlue\Parentity\Traits
+ *
+ * @property \NorseBlue\Parentity\Traits\IsMtiChildModel $entity
+ */
 trait IsMtiParentModel
 {
+    /** @var array */
     protected $childTypeAliases = [];
 
+    /** @var array */
     protected $ownAttributes = [];
 
+    /**
+     * Gets the child entity relationship.
+     *
+     * @return mixed
+     */
     public function entity()
     {
         return $this->morphTo();
     }
 
-    public function getOwnAttributes()
+    /**
+     * Gets the attributes owned by the parent.
+     *
+     * @return array
+     */
+    public function getOwnAttributes(): array
     {
         return array_merge($this->ownAttributes, ['created_at', 'updated_at', 'deleted_at']);
     }
@@ -21,8 +40,9 @@ trait IsMtiParentModel
     /**
      * Handle dynamic method calls into the model.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param  string $method
+     * @param  array $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -36,7 +56,9 @@ trait IsMtiParentModel
 
     private function processCall($method, $parameters)
     {
-        $childModel = is_string($parameters[0]) ? $this->childTypeAliases[($entity_type = array_shift($parameters))] ?? $entity_type : false;
+        $childModel = is_string($parameters[0])
+            ? $this->childTypeAliases[$entity_type = array_shift($parameters)] ?? $entity_type
+            : false;
 
         $parent = $this->forwardCallTo($this->newQuery(), $method, $parameters);
         if ($childModel !== false) {
@@ -49,12 +71,13 @@ trait IsMtiParentModel
     /**
      * Dynamically retrieve attributes on the model.
      *
-     * @param  string  $key
+     * @param  string $key
+     *
      * @return mixed
      */
     public function __get($key)
     {
-        if ($key != 'entity' && !in_array($key, $this->getOwnAttributes())) {
+        if ($key !== 'entity' && !in_array($key, $this->getOwnAttributes(), true)) {
             return $this->entity->$key;
         }
 
@@ -64,13 +87,14 @@ trait IsMtiParentModel
     /**
      * Dynamically set attributes on the model.
      *
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param  string $key
+     * @param  mixed $value
+     *
      * @return void
      */
     public function __set($key, $value)
     {
-        if ($key != 'entity' && !in_array($key, $this->getOwnAttributes())) {
+        if ($key !== 'entity' && !in_array($key, $this->getOwnAttributes(), true)) {
             $this->entity->$key = $value;
         }
 
