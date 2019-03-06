@@ -10,11 +10,13 @@
         }
     ],
     "require": {
-        "illuminate/database": "~5.7.0"
+        "illuminate/database": "~5.8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.7.0",
-        "phpunit/phpunit": "^7.0"
+        "orchestra/testbench": "~3.8.0",
+        "phpunit/phpunit": "^8.0",
+        "phpstan/phpstan": "^0.11.2",
+        "squizlabs/php_codesniffer": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -25,5 +27,22 @@
         "psr-4": {
             "NorseBlue\\Parentity\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "analyse": [
+            "vendor/bin/phpstan analyse --ansi src tests"
+        ],
+        "style-check": [
+            "vendor/bin/phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+        ],
+        "style-fix": [
+            "vendor/bin/phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+        ],
+        "test": [
+            "vendor/bin/phpunit --colors=always"
+        ],
+        "test-coverage": [
+            "vendor/bin/phpunit --colors=always --coverage-clover=./build/coverage.xml --coverage-html=./build/coverage"
+        ]
     }
 }
