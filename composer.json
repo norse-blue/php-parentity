@@ -29,14 +29,19 @@
         }
     },
     "scripts": {
+        "check": [
+            "composer style-check",
+            "composer analyse",
+            "composer test"
+        ],
         "analyse": [
             "vendor/bin/phpstan analyse --ansi src tests"
         ],
         "style-check": [
-            "vendor/bin/phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+            "vendor/bin/phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src"
         ],
         "style-fix": [
-            "vendor/bin/phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+            "vendor/bin/phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src"
         ],
         "test": [
             "vendor/bin/phpunit --colors=always"

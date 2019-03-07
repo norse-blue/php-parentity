@@ -2,12 +2,20 @@
 
 namespace NorseBlue\Parentity\Tests\Models;
 
-use NorseBlue\Parentity\Eloquent\MtiParentModel;
+use Illuminate\Database\Eloquent\Model;
 use NorseBlue\Parentity\Tests\Models\Customers\Company;
 use NorseBlue\Parentity\Tests\Models\Customers\Person;
+use NorseBlue\Parentity\Traits\IsMtiParentModel;
 
-class Customer extends MtiParentModel
+/**
+ * Class Customer
+ *
+ * @package NorseBlue\Parentity\Tests\Models
+ */
+class Customer extends Model
 {
+    use IsMtiParentModel;
+
     protected $fillable = [
         'name',
     ];
@@ -18,6 +26,9 @@ class Customer extends MtiParentModel
     ];
 
     protected $ownAttributes = [
-        'id', 'name', 'entity_type', 'entity_id',
+        'id',
+        'name',
+        'entity_type',
+        'entity_id',
     ];
 }
